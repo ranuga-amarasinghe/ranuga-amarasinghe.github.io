@@ -31,6 +31,7 @@
     .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 760; letter-spacing: -.025em; white-space: nowrap; }
     .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid rgba(84,225,193,.55); border-radius: 12px; color: var(--accent); font-size: 13px; letter-spacing: -.06em; background: rgba(84,225,193,.07); }
+    .brand-photo { width: 39px; height: 39px; object-fit: cover; border-radius: 50%; border: 1px solid rgba(84,225,193,.55); }
     .nav-links { display: flex; align-items: center; gap: 27px; color: var(--muted); font-size: 13px; font-weight: 650; }
     .nav-links a { transition: color .2s ease; }
     .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
@@ -146,7 +147,7 @@
     @media(max-width:620px) { .feature-links {grid-template-columns:1fr;} }
 </style></head><body>  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header"><nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="index.html" aria-label="Ranuga Amarasinghe home"><span class="brand-mark" aria-hidden="true">R8</span><span>Ranuga Amarasinghe</span></a>
+    <a class="brand" href="index.html" aria-label="Ranuga Amarasinghe home"><img class="brand-photo" src="assets/profile-placeholder.svg" alt="" /><span>Ranuga Amarasinghe</span></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">Menu</button>
     <div class="nav-links" id="navLinks"><a href="index.html#about">About</a><a href="projects.html">Projects</a><a href="index.html#skills">Skills</a><a href="awards.html">Awards</a><a href="index.html#contact">Contact</a></div>
   </nav></header><main id="main"><section class="page-hero"><div class="container"><div class="eyebrow">Selected work · Design · Build · Test</div><h1>Projects from the <span class="gradient-text">workbench.</span></h1><p class="hero-copy">A collection of robotics, aerial systems, underwater vehicles, electronics, and software projects. Project descriptions will grow as build logs, photographs, and repositories are published.</p><div class="hero-actions"><a class="button button-secondary" href="awards.html">View awards ↗</a><a class="button button-secondary" href="index.html">Back to home</a></div></div></section>    <section class="section" id="project-list">

@@ -39,6 +39,7 @@
     .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 760; letter-spacing: -.025em; white-space: nowrap; }
     .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid rgba(84,225,193,.55); border-radius: 12px; color: var(--accent); font-size: 13px; letter-spacing: -.06em; background: rgba(84,225,193,.07); }
+    .brand-photo { width: 39px; height: 39px; object-fit: cover; border-radius: 50%; border: 1px solid rgba(84,225,193,.55); }
     .nav-links { display: flex; align-items: center; gap: 27px; color: var(--muted); font-size: 13px; font-weight: 650; }
     .nav-links a { transition: color .2s ease; }
     .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
@@ -112,8 +113,7 @@
       .hero { padding: 70px 0 60px; }
       .hero-grid { grid-template-columns: 1fr; gap: 30px; }
       .hero-visual { min-height: 290px; }
-      .orbital { width: 280px; }
-      .visual-label { right: calc(50% - 170px); }
+      .profile-card { width: min(100%, 355px); }
       .about-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .section-heading { align-items: start; flex-direction: column; }
@@ -131,8 +131,7 @@
       .hero { min-height: auto; padding: 62px 0 55px; }
       h1 { font-size: clamp(40px, 12vw, 59px); }
       .hero-visual { min-height: 260px; }
-      .orbital { width: 245px; }
-      .visual-label { right: calc(50% - 145px); }
+      .profile-photo { width: 150px; height: 150px; }
       .section { padding: 61px 0; }
       .project-grid, .milestone-grid, .skills-grid { grid-template-columns: 1fr; }
       .project-card { min-height: 230px; }
@@ -148,12 +147,19 @@
     .feature-link h3 { margin:0 0 9px; font-size:22px; } .feature-link p { margin:0 0 18px; color:var(--muted); font-size:13px; }
     .text-link { color:var(--accent); font-size:13px; font-weight:750; }
     @media(max-width:620px) { .feature-links {grid-template-columns:1fr;} }
+    .profile-card { width: min(100%, 355px); padding: 30px 26px 25px; text-align: center; border: 1px solid var(--line); border-radius: 26px; background: linear-gradient(145deg, rgba(17,34,54,.92), rgba(10,22,37,.86)); box-shadow: var(--shadow); }
+    .profile-photo { display: block; width: 176px; height: 176px; margin: 0 auto 20px; border-radius: 50%; object-fit: cover; object-position: center; border: 3px solid rgba(84,225,193,.75); box-shadow: 0 0 0 8px rgba(84,225,193,.07), 0 15px 40px rgba(0,0,0,.25); }
+    .profile-card h2 { margin: 0; font-size: 23px; letter-spacing: -.035em; }
+    .profile-role { margin: 8px 0 22px; color: var(--muted); font-size: 12px; }
+    .profile-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .profile-links .button { min-height: 43px; padding: 0 14px; }
+    .profile-hint { margin: 17px 0 0; color: var(--muted); font-size: 10px; }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header"><nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="index.html" aria-label="Ranuga Amarasinghe home"><span class="brand-mark" aria-hidden="true">R8</span><span>Ranuga Amarasinghe</span></a>
+    <a class="brand" href="index.html" aria-label="Ranuga Amarasinghe home"><img class="brand-photo" src="assets/profile-placeholder.svg" alt="" /><span>Ranuga Amarasinghe</span></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">Menu</button>
     <div class="nav-links" id="navLinks"><a href="index.html#about">About</a><a href="projects.html">Projects</a><a href="index.html#skills">Skills</a><a href="awards.html">Awards</a><a href="index.html#contact">Contact</a></div>
   </nav></header>
@@ -170,9 +176,17 @@
             <a class="button button-secondary" href="https://github.com/ranuga-amarasinghe" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
           </div>
         </div>
-        <div class="hero-visual" aria-label="Abstract technical orbital illustration">
-          <div class="orbital"><span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span><div class="orbital-core"><span>R8</span></div></div>
-          <div class="visual-label"><strong>Curiosity → Prototypes</strong>Design · Build · Test · Improve</div>
+        <div class="hero-visual">
+          <div class="profile-card">
+            <img class="profile-photo" src="assets/profile-placeholder.svg" alt="Portrait of Ranuga Amarasinghe" />
+            <h2>Ranuga Amarasinghe</h2>
+            <p class="profile-role">Robotics · Engineering · Autonomous Systems</p>
+            <div class="profile-links">
+              <a class="button button-secondary" href="https://www.linkedin.com/in/ranuga-amarasinghe/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <a class="button button-primary" href="assets/cv.pdf" target="_blank" rel="noopener noreferrer">View CV ↗</a>
+            </div>
+            <p class="profile-hint">Design · Build · Test · Improve</p>
+          </div>
         </div>
       </div>
     </section>
