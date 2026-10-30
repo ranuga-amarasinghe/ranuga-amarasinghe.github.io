@@ -1,332 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07111f" />
-  <meta name="description" content="Ranuga Amarasinghe — robotics, engineering, and autonomous systems projects." />
-  <title>Ranuga Amarasinghe | Robotics & Engineering</title>
-  <style>
-    :root {
-      --bg: #07111f;
-      --bg-soft: #0b1728;
-      --panel: rgba(15, 30, 49, .78);
-      --panel-solid: #0e1c2f;
-      --text: #eef5ff;
-      --muted: #a6b7cc;
-      --line: rgba(173, 203, 232, .15);
-      --accent: #54e1c1;
-      --accent-2: #83b7ff;
-      --max: 1120px;
-      --radius: 22px;
-      --shadow: 0 22px 70px rgba(0,0,0,.24);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
-    body {
-      margin: 0; color: var(--text); background:
-        radial-gradient(ellipse at 82% 5%, rgba(45, 129, 151, .17), transparent 36rem),
-        radial-gradient(ellipse at 4% 28%, rgba(53, 93, 161, .13), transparent 32rem), var(--bg);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.65; -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
-    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
-    .skip-link { position: absolute; left: -999px; top: 10px; z-index: 100; background: var(--accent); color: #04121a; padding: 10px 14px; border-radius: 8px; }
-    .skip-link:focus { left: 10px; }
-    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(7, 17, 31, .82); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
-    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 760; letter-spacing: -.025em; white-space: nowrap; }
-    .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid rgba(84,225,193,.55); border-radius: 12px; color: var(--accent); font-size: 13px; letter-spacing: -.06em; background: rgba(84,225,193,.07); }
-    .brand-photo { width: 39px; height: 39px; object-fit: cover; border-radius: 50%; border: 1px solid rgba(84,225,193,.55); }
-    .nav-links { display: flex; align-items: center; gap: 27px; color: var(--muted); font-size: 13px; font-weight: 650; }
-    .nav-links a { transition: color .2s ease; }
-    .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
-    .nav-toggle { display: none; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 8px 11px; cursor: pointer; }
-    .hero { padding: 100px 0 82px; min-height: 590px; display: flex; align-items: center; }
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 70px; align-items: center; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: .16em; font-size: 11px; font-weight: 800; }
-    .eyebrow::before { content: ""; width: 26px; height: 1px; background: currentColor; }
-    h1 { margin: 19px 0 22px; max-width: 760px; font-size: clamp(42px, 6.2vw, 76px); line-height: 1.04; letter-spacing: -.065em; font-weight: 790; }
-    .gradient-text { color: var(--accent); }
-    .hero-copy { max-width: 630px; color: var(--muted); font-size: clamp(16px, 1.7vw, 19px); }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 47px; padding: 0 18px; border-radius: 12px; border: 1px solid var(--line); font-size: 13px; font-weight: 750; transition: transform .2s ease, border-color .2s ease, background .2s ease; }
-    .button:hover { transform: translateY(-2px); border-color: rgba(84,225,193,.6); }
-    .button-primary { color: #04151a; background: var(--accent); border-color: var(--accent); }
-    .button-secondary { background: rgba(255,255,255,.025); color: var(--text); }
-    .hero-visual { position: relative; min-height: 350px; display: grid; place-items: center; }
-    .orbital { position: relative; width: min(100%, 355px); aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(131,183,255,.24); background: radial-gradient(circle at center, rgba(84,225,193,.12), rgba(12,28,46,.3) 52%, transparent 70%); }
-    .orbital::before, .orbital::after { content: ""; position: absolute; inset: 12%; border: 1px dashed rgba(84,225,193,.28); border-radius: 50%; transform: rotate(-32deg) scaleX(.68); }
-    .orbital::after { inset: 2%; transform: rotate(54deg) scaleX(.72); border-color: rgba(131,183,255,.25); }
-    .orbital-core { position: absolute; inset: 27%; display: grid; place-items: center; border: 1px solid rgba(84,225,193,.45); border-radius: 28%; transform: rotate(45deg); background: linear-gradient(145deg, rgba(84,225,193,.13), rgba(131,183,255,.08)); box-shadow: 0 0 70px rgba(84,225,193,.1), inset 0 0 35px rgba(84,225,193,.06); }
-    .orbital-core span { transform: rotate(-45deg); color: var(--accent); font-size: clamp(42px, 5vw, 64px); font-weight: 850; letter-spacing: -.09em; }
-    .orbit-dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 18px rgba(84,225,193,.8); }
-    .dot-one { top: 17%; right: 20%; } .dot-two { bottom: 19%; left: 13%; width: 7px; height: 7px; background: var(--accent-2); }
-    .visual-label { position: absolute; bottom: 0; right: 0; padding: 12px 15px; border: 1px solid var(--line); border-radius: 14px; background: rgba(10,24,40,.88); color: var(--muted); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
-    .visual-label strong { color: var(--text); display: block; font-size: 13px; letter-spacing: 0; text-transform: none; }
-    .section { padding: 82px 0; border-top: 1px solid var(--line); }
-    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 28px; margin-bottom: 35px; }
-    .section-kicker { color: var(--accent); text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: .16em; }
-    h2 { margin: 7px 0 0; font-size: clamp(30px, 4vw, 44px); line-height: 1.12; letter-spacing: -.045em; }
-    .section-intro { max-width: 500px; margin: 0; color: var(--muted); font-size: 14px; }
-    .about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 28px; }
-    .panel { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(18,35,56,.83), rgba(10,23,39,.72)); box-shadow: var(--shadow); }
-    .panel p { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
-    .panel p:last-child { margin-bottom: 0; }
-    .focus-list { display: grid; gap: 12px; }
-    .focus-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .focus-item:last-child { border-bottom: 0; padding-bottom: 0; }
-    .focus-icon { display: grid; place-items: center; flex: 0 0 39px; height: 39px; border-radius: 12px; background: rgba(84,225,193,.09); border: 1px solid rgba(84,225,193,.2); color: var(--accent); font-size: 17px; }
-    .focus-item strong { display: block; font-size: 14px; }
-    .focus-item span { color: var(--muted); font-size: 12px; }
-    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-    .project-card { min-height: 255px; display: flex; flex-direction: column; padding: 25px; border: 1px solid var(--line); border-radius: 19px; background: linear-gradient(145deg, rgba(17,34,54,.9), rgba(10,22,37,.8)); transition: transform .22s ease, border-color .22s ease; }
-    .project-card:hover { transform: translateY(-4px); border-color: rgba(84,225,193,.42); }
-    .project-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 22px; }
-    .project-index { color: var(--accent); font: 700 11px ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .08em; }
-    .project-type { padding: 5px 9px; border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.04); border: 1px solid var(--line); font-size: 10px; }
-    .project-card h3 { margin: 0 0 9px; font-size: 19px; letter-spacing: -.025em; }
-    .project-card p { margin: 0; color: var(--muted); font-size: 13px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding-top: 20px; }
-    .tag { padding: 5px 8px; border-radius: 7px; border: 1px solid rgba(131,183,255,.16); color: #b9d5f7; background: rgba(131,183,255,.05); font-size: 10px; }
-    .note { margin-top: 20px; color: var(--muted); font-size: 12px; }
-    .skills-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
-    .skill-card { padding: 22px; border: 1px solid var(--line); border-radius: 17px; background: rgba(13,28,46,.65); }
-    .skill-card h3 { margin: 0 0 13px; font-size: 14px; }
-    .skill-card p { margin: 0; color: var(--muted); font-size: 12px; }
-    .milestone-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .milestone { padding: 20px 22px; border-left: 2px solid var(--accent); border-radius: 0 13px 13px 0; background: rgba(14,29,47,.75); }
-    .milestone strong { display: block; font-size: 14px; }
-    .milestone span { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; }
-    .contact-panel { display: flex; justify-content: space-between; align-items: center; gap: 35px; padding: clamp(26px, 5vw, 48px); border: 1px solid rgba(84,225,193,.28); border-radius: 24px; background: radial-gradient(ellipse at 100% 0%, rgba(84,225,193,.12), transparent 55%), rgba(13,29,47,.8); }
-    .contact-panel h2 { max-width: 560px; }
-    .contact-panel p { color: var(--muted); max-width: 530px; font-size: 14px; }
-    .contact-actions { display: flex; flex-direction: column; gap: 10px; min-width: 165px; }
-    footer { padding: 27px 0; color: var(--muted); font-size: 11px; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-    .footer-links { display: flex; gap: 18px; }
-    .footer-links a:hover { color: var(--accent); }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-    @media (max-width: 820px) {
-      .hero { padding: 70px 0 60px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
-      .hero-visual { min-height: 290px; }
-      .profile-card { width: min(100%, 355px); }
-      .about-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .section-heading { align-items: start; flex-direction: column; }
-      .contact-panel { align-items: flex-start; flex-direction: column; }
-      .contact-actions { flex-direction: row; flex-wrap: wrap; }
-    }
-    @media (max-width: 620px) {
-      .container { width: min(var(--max), calc(100% - 30px)); }
-      .nav { min-height: 68px; }
-      .nav-toggle { display: inline-flex; }
-      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 22px 22px; background: #091525; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; }
-      .nav-links.open { display: flex; }
-      .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); }
-      .nav-links a:last-child { border-bottom: 0; }
-      .hero { min-height: auto; padding: 62px 0 55px; }
-      h1 { font-size: clamp(40px, 12vw, 59px); }
-      .hero-visual { min-height: 260px; }
-      .profile-photo { width: 150px; height: 150px; }
-      .section { padding: 61px 0; }
-      .project-grid, .milestone-grid, .skills-grid { grid-template-columns: 1fr; }
-      .project-card { min-height: 230px; }
-      .panel { padding: 22px; }
-      .footer-inner { align-items: flex-start; flex-direction: column; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
-  
-    .feature-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
-    .feature-link { display:block; padding:28px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(145deg,rgba(17,34,54,.9),rgba(10,22,37,.8)); transition:transform .2s,border-color .2s; }
-    .feature-link:hover { transform:translateY(-4px); border-color:rgba(84,225,193,.5); }
-    .feature-link .section-kicker { display:block; margin-bottom:12px; }
-    .feature-link h3 { margin:0 0 9px; font-size:22px; } .feature-link p { margin:0 0 18px; color:var(--muted); font-size:13px; }
-    .text-link { color:var(--accent); font-size:13px; font-weight:750; }
-    @media(max-width:620px) { .feature-links {grid-template-columns:1fr;} }
-    .profile-card { width: min(100%, 355px); padding: 30px 26px 25px; text-align: center; border: 1px solid var(--line); border-radius: 26px; background: linear-gradient(145deg, rgba(17,34,54,.92), rgba(10,22,37,.86)); box-shadow: var(--shadow); }
-    .profile-photo { display: block; width: 176px; height: 176px; margin: 0 auto 20px; border-radius: 50%; object-fit: cover; object-position: center; border: 3px solid rgba(84,225,193,.75); box-shadow: 0 0 0 8px rgba(84,225,193,.07), 0 15px 40px rgba(0,0,0,.25); }
-    .profile-card h2 { margin: 0; font-size: 23px; letter-spacing: -.035em; }
-    .profile-role { margin: 8px 0 22px; color: var(--muted); font-size: 12px; }
-    .profile-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-    .profile-links .button { min-height: 43px; padding: 0 14px; }
-    .profile-hint { margin: 17px 0 0; color: var(--muted); font-size: 10px; }
-  
-    /* Clean academic portfolio styling */
-    :root { --bg:#ffffff; --bg-soft:#f7f9fc; --panel:#ffffff; --panel-solid:#ffffff; --text:#202936; --muted:#596579; --line:#e2e7ee; --accent:#1769aa; --accent-2:#3978b8; --radius:8px; --shadow:0 5px 22px rgba(24,42,66,.06); }
-    body { background:#fff; color:var(--text); }
-    .site-header { background:rgba(255,255,255,.96); border-bottom:1px solid #e7ebf0; backdrop-filter:blur(10px); }
-    .brand { color:#172333; }
-    .brand-photo { border:1px solid #d5dce5; }
-    .nav-links { color:#465266; }
-    .nav-links a:hover,.nav-links a:focus-visible { color:var(--accent); }
-    .nav-toggle { color:var(--text); border-color:var(--line); }
-    .hero { min-height:0; padding:78px 0 70px; }
-    .hero-grid { gap:54px; }
-    .eyebrow,.section-kicker { color:var(--accent); }
-    h1 { font-size:clamp(38px,5.2vw,62px); letter-spacing:-.045em; font-weight:760; }
-    .gradient-text { color:#1769aa; }
-    .hero-copy { color:#4f5d70; font-size:17px; }
-    .button { border-radius:5px; font-weight:650; }
-    .button-primary { background:#1769aa; color:#fff; border-color:#1769aa; }
-    .button-secondary { color:#253348; background:#fff; border-color:#d5dce5; }
-    .button:hover { border-color:#1769aa; }
-    .profile-card { background:#fff; border:1px solid #e0e6ee; border-radius:8px; box-shadow:0 8px 30px rgba(24,42,66,.08); }
-    .profile-photo { border:3px solid #e5edf5; box-shadow:none; }
-    .profile-card h2 { color:#202936; }
-    .profile-role,.profile-hint { color:#596579; }
-    .section { border-top:1px solid #e8edf2; }
-    .section-heading { align-items:flex-start; }
-    h2 { color:#202936; letter-spacing:-.035em; }
-    .section-intro,.panel p { color:#596579; }
-    .panel,.feature-link { background:#fff; border:1px solid #e1e7ef; border-radius:8px; box-shadow:none; }
-    .focus-item { border-color:#e8edf2; }
-    .feature-link:hover { border-color:#8eb4d8; }
-    .feature-link h3 { color:#202936; }
-    .feature-link p { color:#596579; }
-    .text-link { color:#1769aa; }
-    .award-item { background:#f8fafc; border-left-color:#1769aa; border-radius:0 6px 6px 0; }
-    .award-item h3 { color:#202936; }
-    .award-item p { color:#596579; }
-    .site-footer, footer { color:#596579; }
-    @media(max-width:760px) { .hero { padding:55px 0 48px; } .hero-grid { gap:30px; } }
-
-      /* Unified colour palette: white, slate, and restrained academic blue */
-    :root {
-      --bg: #ffffff; --bg-soft: #f5f8fc; --panel: #ffffff; --panel-solid: #ffffff;
-      --text: #1f2937; --muted: #596779; --line: #dfe6ef;
-      --accent: #245da8; --accent-2: #6b8fc7; --radius: 10px;
-      --shadow: 0 4px 18px rgba(27, 54, 91, 0.07);
-    }
-    body { background: #ffffff; color: var(--text); }
-    .site-header { background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
-    .brand, .profile-card h2 { color: #1f2937; }
-    .brand-mark { color: var(--accent); border-color: #b9cce7; background: #f2f6fc; }
-    .brand-photo { border-color: #d7e1ef; }
-    .nav-links { color: #4d5b6e; }
-    .nav-links a:hover, .nav-links a:focus-visible, .footer-links a:hover, .text-link { color: var(--accent); }
-    .nav-toggle { color: var(--text); border-color: var(--line); }
-    .eyebrow, .section-kicker, .project-index { color: var(--accent); }
-    .gradient-text { color: var(--accent); }
-    .hero-copy, .section-intro, .panel p, .project-card p, .skill-card p, .milestone span, .contact-panel p, .profile-role, .profile-hint, footer, .note { color: var(--muted); }
-    .button { border-radius: 6px; }
-    .button-primary { color: #fff; background: var(--accent); border-color: var(--accent); }
-    .button-secondary { color: #27364a; background: #fff; border-color: #ccd7e5; }
-    .button:hover { border-color: var(--accent); }
-    .panel, .project-card, .feature-link, .profile-card, .skill-card { background: #fff; border-color: var(--line); box-shadow: var(--shadow); }
-    .project-card:hover, .feature-link:hover { border-color: #9eb8dc; }
-    .project-type { color: #4f5f73; background: #f5f8fc; border-color: #dfe6ef; }
-    .tag { color: #315b91; background: #f1f6fd; border-color: #d8e5f5; }
-    .focus-icon { color: var(--accent); background: #f1f6fd; border-color: #d8e5f5; }
-    .focus-item { border-color: var(--line); }
-    .milestone { border-left-color: var(--accent); background: #f5f8fc; }
-    .contact-panel { border-color: #cbd9ed; background: #f5f8fc; }
-    .orbital { border-color: #d5e0ef; background: radial-gradient(circle at center, #eaf1fb, #f8fafd 56%, transparent 72%); }
-    .orbital::before { border-color: #b9cce7; }
-    .orbital::after { border-color: #d0dced; }
-    .orbital-core { border-color: #9fb9df; background: linear-gradient(145deg, #e5eefb, #f5f8fd); box-shadow: 0 0 35px rgba(36,93,168,.08), inset 0 0 20px rgba(36,93,168,.04); }
-    .orbital-core span { color: var(--accent); }
-    .orbit-dot { background: var(--accent); box-shadow: 0 0 12px rgba(36,93,168,.25); }
-    .dot-two { background: var(--accent-2); }
-    .visual-label { background: #fff; color: var(--muted); border-color: var(--line); box-shadow: var(--shadow); }
-    .visual-label strong { color: var(--text); }
-    .profile-photo { border-color: #d9e4f2; box-shadow: none; }
-    :focus-visible { outline-color: var(--accent); }
-    @media (max-width: 620px) { .nav-links { background: #fff; border-bottom-color: var(--line); } }
-
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ranuga Amarasinghe | Robotics and engineering portfolio</title>
+  <meta name="description" content="Portfolio of Ranuga Amarasinghe, a student and maker in Sri Lanka working on robotics, mechatronics, autonomous systems, and engineering projects.">
+  <meta name="theme-color" content="#0a0e16" id="themeColor">
+  <link rel="canonical" href="https://ranuga-amarasinghe.github.io/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ranuga Amarasinghe | Robotics and engineering portfolio">
+  <meta property="og:description" content="Portfolio of Ranuga Amarasinghe, a student and maker in Sri Lanka working on robotics, mechatronics, autonomous systems, and engineering projects.">
+  <meta property="og:url" content="https://ranuga-amarasinghe.github.io/index.html">
+  <meta property="og:image" content="https://ranuga-amarasinghe.github.io/assets/profile.jpg">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
-<body>
+<body data-page="home">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="index.html" aria-label="Ranuga Amarasinghe home"><img class="brand-photo" src="assets/profile.jpg" alt="" /><span>Ranuga Amarasinghe</span></a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">Menu</button>
-    <div class="nav-links" id="navLinks"><a href="index.html#about">About</a><a href="projects.html">Projects</a><a href="index.html#skills">Skills</a><a href="awards.html">Awards</a><a href="index.html#contact">Contact</a></div>
-  </nav></header>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false"><defs><symbol id="i-auv" viewBox="0 0 48 48"><rect x="5" y="17" width="32" height="13" rx="6.5"/><path d="M17 17l3-5h7l3 5M37 23.5h4M42 18v11"/><circle cx="14" cy="23.5" r="2"/><path d="M6 38c3-2 5 2 8 0s5 2 8 0 5 2 8 0 5 2 8 0"/></symbol><symbol id="i-quad" viewBox="0 0 48 48"><rect x="19" y="19" width="10" height="10" rx="2"/><path d="M19.5 19.5L13 13M28.5 19.5L35 13M19.5 28.5L13 35M28.5 28.5L35 35"/><circle cx="10" cy="10" r="4.5"/><circle cx="38" cy="10" r="4.5"/><circle cx="10" cy="38" r="4.5"/><circle cx="38" cy="38" r="4.5"/></symbol><symbol id="i-hex" viewBox="0 0 48 48"><circle cx="24" cy="24" r="4"/><path d="M28.0 24.0L36.5 24.0"/><circle cx="40.0" cy="24.0" r="3.5"/><path d="M26.0 27.5L30.2 34.8"/><circle cx="32.0" cy="37.9" r="3.5"/><path d="M22.0 27.5L17.8 34.8"/><circle cx="16.0" cy="37.9" r="3.5"/><path d="M20.0 24.0L11.5 24.0"/><circle cx="8.0" cy="24.0" r="3.5"/><path d="M22.0 20.5L17.7 13.2"/><circle cx="16.0" cy="10.1" r="3.5"/><path d="M26.0 20.5L30.2 13.2"/><circle cx="32.0" cy="10.1" r="3.5"/></symbol><symbol id="i-maze" viewBox="0 0 48 48"><rect x="7" y="7" width="34" height="34"/><path d="M7 17h18M33 17h8M17 25h16M17 25v8M25 33h16M25 33v-4"/><circle cx="12" cy="29" r="2.5"/></symbol><symbol id="i-rov" viewBox="0 0 48 48"><rect x="13" y="18" width="22" height="14" rx="3"/><circle cx="8" cy="25" r="3.5"/><circle cx="40" cy="25" r="3.5"/><circle cx="24" cy="12" r="3.5"/><path d="M11.5 25H13M35 25h1.5M24 15.5V18M24 32v12M24 8.5V4"/></symbol><symbol id="i-app" viewBox="0 0 48 48"><rect x="14" y="5" width="20" height="38" rx="3.5"/><path d="M20 38h8M17.5 19a9.5 9.5 0 0 1 13 0M20.5 23a5.5 5.5 0 0 1 7 0"/><circle cx="24" cy="27.5" r=".9" fill="currentColor"/></symbol><symbol id="i-plant" viewBox="0 0 48 48"><path d="M24 42V24M14 42h20M24 29c-9 0-12-6-12-13 8 0 12 5 12 13zM24 24c0-7 4-11 12-11 0 7-4 11-12 11z"/></symbol><symbol id="i-plane" viewBox="0 0 48 48"><path d="M24 5c2 0 3 2 3 5v10l16 9v4l-16-4v8l5 4v3l-8-2-8 2v-3l5-4v-8L5 33v-4l16-9V10c0-3 1-5 3-5z"/></symbol><symbol id="i-robot" viewBox="0 0 48 48"><rect x="12" y="16" width="24" height="18" rx="3"/><circle cx="19" cy="25" r="2.5"/><circle cx="29" cy="25" r="2.5"/><path d="M24 16V10M12 25H8M36 25h4M18 34v5M30 34v5"/><circle cx="24" cy="8" r="2"/></symbol><symbol id="i-gear" viewBox="0 0 48 48"><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="14"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.9 9.9l4.2 4.2M33.9 33.9l4.2 4.2M9.9 38.1l4.2-4.2M33.9 14.1l4.2-4.2"/></symbol><symbol id="i-chip" viewBox="0 0 48 48"><rect x="14" y="14" width="20" height="20" rx="2"/><rect x="20" y="20" width="8" height="8"/><path d="M19 14V7M24 14V7M29 14V7M19 34v7M24 34v7M29 34v7M14 19H7M14 24H7M14 29H7M34 19h7M34 24h7M34 29h7"/></symbol><symbol id="i-code" viewBox="0 0 48 48"><path d="M17 15L7 24l10 9M31 15l10 9-10 9M27 10l-6 28"/></symbol></defs></svg>  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="brand" href="index.html" aria-label="Ranuga Amarasinghe, home"><img class="brand__photo" src="assets/profile.jpg" width="40" height="40" alt=""><span>Ranuga Amarasinghe</span></a>
+      <div class="nav__actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light theme" title="Switch theme">
+          <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu"><span class="nav__toggle-icon" aria-hidden="true"></span><span class="nav__toggle-text">Menu</span></button>
+      </div>
+      <div class="nav__menu" id="navMenu">
+        <div class="nav__links">
+          <a class="nav__link" href="index.html#about">About</a>
+          <a class="nav__link" href="projects.html">Projects</a>
+          <a class="nav__link" href="index.html#skills">Skills</a>
+          <a class="nav__link" href="awards.html">Awards</a>
+          <a class="nav__link" href="index.html#contact">Contact</a>
+        </div>
+        <a class="button button--primary" href="assets/cv.pdf" target="_blank" rel="noopener noreferrer">View CV <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </nav>
+  </header>
 
   <main id="main">
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Robotics · Engineering · Autonomous Systems</div>
-          <h1>Ranuga <span class="gradient-text">Amarasinghe</span></h1>
-          <p class="hero-copy">I’m Ranuga Amarasinghe, a student and maker interested in robotics, embedded systems, mechanical design, and autonomous machines. I enjoy working across hardware and software to turn concepts into things that move, sense, and solve problems.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="projects.html">Explore my projects <span aria-hidden="true">↘</span></a>
-            <a class="button button-secondary" href="https://github.com/ranuga-amarasinghe" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="profile-card">
-            <img class="profile-photo" src="assets/profile.jpg" alt="Portrait of Ranuga Amarasinghe" />
-            <h2>Ranuga Amarasinghe</h2>
-            <p class="profile-role">Robotics · Engineering · Autonomous Systems</p>
-            <div class="profile-links">
-              <a class="button button-secondary" href="https://www.linkedin.com/in/ranuga-amarasinghe/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-              <a class="button button-primary" href="assets/cv.pdf" target="_blank" rel="noopener noreferrer">View CV ↗</a>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__grid">
+          <div>
+            <p class="label hero__eyebrow">Robotics · Mechatronics · Autonomous systems</p>
+            <h1 id="hero-title">Ranuga Amarasinghe</h1>
+            <p class="hero__lead">Student and maker from Sri Lanka, building robots, drones, and underwater vehicles, from mechanical design and electronics to the software that runs them.</p>
+            <div class="button-row">
+              <a class="button button--primary" href="projects.html">View projects <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="button button--secondary" href="assets/cv.pdf" target="_blank" rel="noopener noreferrer">View CV <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+              <a class="button button--secondary" href="https://github.com/ranuga-amarasinghe" target="_blank" rel="noopener noreferrer">GitHub <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
-            
           </div>
+          <figure class="portrait">
+            <div class="portrait__frame"><img src="assets/profile.jpg" width="403" height="403" alt="Portrait of Ranuga Amarasinghe" fetchpriority="high"></div>
+            <figcaption><span>Robotics</span><span>Mechatronics</span><span>Sri Lanka</span></figcaption>
+          </figure>
+        </div>
+        <div class="stats" role="list">
+          <div class="stat" role="listitem"><span class="stat__value" data-count="projects">9</span><span class="stat__label">Engineering projects</span></div>
+          <div class="stat" role="listitem"><span class="stat__value" data-count="awards">7</span><span class="stat__label">Awards and placements</span></div>
+          <div class="stat" role="listitem"><span class="stat__value" data-count="leadership">7</span><span class="stat__label">Leadership roles</span></div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="about">
+    <section class="section" id="projects" aria-labelledby="projects-title" style="border-top:1px solid var(--line)">
       <div class="container">
-        <div class="section-heading"><div><div class="section-kicker">01 / About</div><h2>Curious by design.</h2></div><p class="section-intro">My interests sit at the intersection of physical engineering and software — where code meets circuits, structures, sensors, and motion.</p></div>
-        <div class="about-grid">
-          <div class="panel">
-            <p>I’m especially interested in autonomous systems and robotics, from underwater vehicles and aerial platforms to small embedded projects. I like understanding how a system works as a whole: its mechanical design, electronics, control logic, and software.</p>
-            <p>Through team competitions and independent experimentation, I’ve explored building, testing, troubleshooting, and improving working prototypes. I’m continuing to develop my skills and document the projects I learn from.</p>
+        <div class="section-head reveal">
+          <div><span class="label">Selected work</span><h2 id="projects-title">Featured projects</h2></div>
+          <p>Four projects that combine mechanical design, electronics, and software, each recognised in a competition or contest.</p>
+        </div>
+        <div class="teaser-grid" id="featured-projects"><noscript><p>Please enable JavaScript to see the project list, or visit the <a href="projects.html">projects page</a>.</p></noscript></div>
+        <div class="section-foot section-foot--cta"><a class="button button--primary button--lg" href="projects.html">View all projects <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about">
+          <div class="about__text reveal">
+            <span class="label">About</span>
+            <h2 id="about-title" style="margin:var(--s-3) 0 var(--s-5)">Hello There!</h2>
+            <p>I’m a student and maker from Sri Lanka with interests in robotics, embedded systems, mechanical design, and autonomous machines. I enjoy combining hardware and software to turn ideas into working projects.</p>
+            <p>I like understanding how different parts of a system fit together, from mechanical design and electronics to control systems and software. This has led me to explore everything from underwater robots and aerial platforms to smaller embedded projects.</p>
+            <p>Through team competitions and personal projects, I’ve gained hands-on experience in building, testing, troubleshooting, and improving prototypes. I’m always looking to learn new skills and document what I create. Outside engineering, I enjoy aerial photography and nature videography with my DJI Mini 4 Pro.</p>
           </div>
-          <div class="panel focus-list">
-            <div class="focus-item"><div class="focus-icon" aria-hidden="true">⌘</div><div><strong>Robotics & autonomy</strong><span>Mobile robots, underwater vehicles, sensing and control</span></div></div>
-            <div class="focus-item"><div class="focus-icon" aria-hidden="true">⌁</div><div><strong>Mechanical design</strong><span>CAD, prototyping, mechanisms and 3D printing</span></div></div>
-            <div class="focus-item"><div class="focus-icon" aria-hidden="true">⌬</div><div><strong>Electronics & embedded systems</strong><span>Microcontrollers, sensors, integration and debugging</span></div></div>
-            <div class="focus-item"><div class="focus-icon" aria-hidden="true">⌨</div><div><strong>Software</strong><span>Programming, computer vision and practical applications</span></div></div>
-          </div>
+          <dl class="facts reveal">
+            <div class="facts__row"><dt>Location</dt><dd>Sri Lanka</dd></div>
+            <div class="facts__row"><dt>Age</dt><dd>18</dd></div>
+            <div class="facts__row"><dt>School</dt><dd>Dharmapala College, Pannipitiya<span>English medium</span></dd></div>
+            <div class="facts__row"><dt>Languages</dt><dd>English (professional), Sinhala (native)</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
-    <section class="section" id="explore"><div class="container"><div class="section-heading"><div><div class="section-kicker">02 / Explore</div><h2>Explore my work.</h2></div><p class="section-intro">Open a dedicated page for detailed project summaries or competition awards and recognition.</p></div><div class="feature-links"><a class="feature-link" href="projects.html"><span class="section-kicker">Projects / 08+</span><h3>Engineering projects</h3><p>Explore robotics, drones, underwater vehicles, embedded systems, and software projects.</p><span class="text-link">View all projects ↗</span></a><a class="feature-link" href="awards.html"><span class="section-kicker">Awards / Recognition</span><h3>Competitions & awards</h3><p>See competition results and recognitions earned through robotics, engineering, and science.</p><span class="text-link">View awards ↗</span></a></div></div></section>
-
-    <section class="section" id="skills">
+    <section class="section" aria-labelledby="focus-title">
       <div class="container">
-        <div class="section-heading"><div><div class="section-kicker">03 / Toolkit</div><h2>Tools I work with.</h2></div><p class="section-intro">A cross-disciplinary toolkit for prototyping physical systems and building supporting software.</p></div>
-        <div class="skills-grid">
-          <div class="skill-card"><h3>Programming</h3><p>Python · C++ · Dart · HTML · PHP</p></div>
-          <div class="skill-card"><h3>App development</h3><p>Flutter · Android application development</p></div>
-          <div class="skill-card"><h3>CAD & 3D design</h3><p>Autodesk Fusion 360 · SOLIDWORKS · 3D printing</p></div>
-          <div class="skill-card"><h3>Electronics & prototyping</h3><p>Arduino · Raspberry Pi · PCB design · sensors</p></div>
-          <div class="skill-card"><h3>Development tools</h3><p>Arduino IDE · Android Studio · VS Code · Git</p></div>
-          <div class="skill-card"><h3>Engineering practice</h3><p>Mechanical assembly · system integration · testing and troubleshooting</p></div>
+        <div class="section-head reveal">
+          <div><span class="label">Focus areas</span><h2 id="focus-title">What I work on</h2></div>
+          <p>My interests sit where physical engineering meets software: circuits, structures, sensors, and motion.</p>
+        </div>
+        <div class="grid grid--4">
+          <div class="card reveal"><span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#i-robot"/></svg></span><h3>Robotics and autonomy</h3><p>Mobile robots, underwater vehicles, sensing, and control.</p></div>
+          <div class="card reveal"><span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#i-gear"/></svg></span><h3>Mechanical design</h3><p>CAD, prototyping, mechanisms, and 3D printing.</p></div>
+          <div class="card reveal"><span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#i-chip"/></svg></span><h3>Electronics and embedded systems</h3><p>Microcontrollers, sensors, integration, and debugging.</p></div>
+          <div class="card reveal"><span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#i-code"/></svg></span><h3>Software</h3><p>Programming, computer vision, and practical applications.</p></div>
         </div>
       </div>
     </section>
 
-
-
-    <section class="section" id="contact">
+    <section class="section section--alt" id="skills" aria-labelledby="skills-title">
       <div class="container">
-        <div class="contact-panel">
-          <div><div class="section-kicker">05 / Get in touch</div><h2>Let’s build something meaningful.</h2><p>I’m interested in connecting with people working in robotics, engineering, autonomous systems, and hands-on STEM projects.</p></div>
-          <div class="contact-actions"><a class="button button-primary" href="mailto:ranurobotics@gmail.com">Email me ↗</a><a class="button button-secondary" href="https://github.com/ranuga-amarasinghe" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="button button-secondary" href="https://www.linkedin.com/in/ranuga-amarasinghe/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div>
+        <div class="section-head reveal">
+          <div><span class="label">Toolkit</span><h2 id="skills-title">Tools and skills</h2></div>
+          <p>A cross-disciplinary toolkit for prototyping physical systems and writing the software that supports them.</p>
+        </div>
+        <div class="grid grid--3">
+          <div class="skill reveal"><h3>Programming</h3><ul class="chips" aria-label="Technologies"><li class="chip">Python</li><li class="chip">C++</li><li class="chip">Dart</li><li class="chip">HTML</li><li class="chip">PHP</li></ul></div>
+          <div class="skill reveal"><h3>App development</h3><ul class="chips" aria-label="Technologies"><li class="chip">Flutter</li><li class="chip">Android</li></ul></div>
+          <div class="skill reveal"><h3>CAD and 3D design</h3><ul class="chips" aria-label="Technologies"><li class="chip">Autodesk Fusion 360</li><li class="chip">SOLIDWORKS</li><li class="chip">3D printing</li></ul></div>
+          <div class="skill reveal"><h3>Electronics and prototyping</h3><ul class="chips" aria-label="Technologies"><li class="chip">Arduino</li><li class="chip">Raspberry Pi</li><li class="chip">PCB design</li><li class="chip">Sensors</li></ul></div>
+          <div class="skill reveal"><h3>Development tools</h3><ul class="chips" aria-label="Technologies"><li class="chip">Arduino IDE</li><li class="chip">Android Studio</li><li class="chip">VS Code</li><li class="chip">Git</li></ul></div>
+          <div class="skill reveal"><h3>Engineering practice</h3><ul class="chips" aria-label="Technologies"><li class="chip">Mechanical assembly</li><li class="chip">System integration</li><li class="chip">Testing</li><li class="chip">Troubleshooting</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="awards-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="label">Recognition</span><h2 id="awards-title">Recent awards</h2></div>
+          <p>Results from robotics, engineering, and science competitions.</p>
+        </div>
+        <ol class="timeline" id="recent-awards"></ol>
+        <div class="section-foot section-foot--cta"><a class="button button--primary button--lg" href="awards.html">View all awards and leadership <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="container contact__grid">
+        <div class="reveal">
+          <span class="label">Contact</span>
+          <h2 id="contact-title">Get in touch</h2>
+          <p>I’m interested in connecting with people working in robotics, engineering, autonomous systems, and hands-on STEM projects.</p>
+          <div class="button-row">
+            <a class="button button--light" href="mailto:ranurobotics@gmail.com">Email me <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="button button--ghost-light" href="assets/cv.pdf" target="_blank" rel="noopener noreferrer">View CV <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+                <div class="contact__list reveal">
+          <a class="contact__item" href="mailto:ranurobotics@gmail.com"><svg class="contact__ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span class="contact__name">Email</span><span class="contact__val">ranurobotics@gmail.com</span><svg class="contact__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="contact__item" href="https://github.com/ranuga-amarasinghe" target="_blank" rel="noopener noreferrer"><svg class="contact__ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg><span class="contact__name">GitHub</span><span class="contact__val">ranuga-amarasinghe</span><svg class="contact__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="contact__item" href="https://www.linkedin.com/in/ranuga-amarasinghe/" target="_blank" rel="noopener noreferrer"><svg class="contact__ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span class="contact__name">LinkedIn</span><span class="contact__val">ranuga-amarasinghe</span><svg class="contact__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="contact__item" href="https://www.youtube.com/@Ranuga_Amarasinghe" target="_blank" rel="noopener noreferrer"><svg class="contact__ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg><span class="contact__name">YouTube</span><span class="contact__val">@Ranuga_Amarasinghe</span><svg class="contact__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="contact__item" href="https://www.instructables.com/member/Ranuga" target="_blank" rel="noopener noreferrer"><svg class="contact__ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="7.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span class="contact__name">Instructables</span><span class="contact__val">Ranuga</span><svg class="contact__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12L12 4M5 4h7v7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer><div class="container footer-inner"><span>© <span id="year"></span> Ranuga Amarasinghe. Built with curiosity.</span><div class="footer-links"><a href="https://github.com/ranuga-amarasinghe" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.linkedin.com/in/ranuga-amarasinghe/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="index.html">Home</a></div></div></footer>
-  <script>
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => { const isOpen = navLinks.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(isOpen)); navToggle.textContent = isOpen ? 'Close' : 'Menu'; });
-    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); navToggle.textContent = 'Menu'; }));
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span id="year">2026</span> Ranuga Amarasinghe</span>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="awards.html">Awards</a>
+        <a href="https://github.com/ranuga-amarasinghe" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/ranuga-amarasinghe/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="data/content.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
