@@ -98,8 +98,8 @@ documents: [
       cover: "assets/projects/sky-sow/cover.jpg", gallery: [
 { src: "assets/projects/sky-sow/1.jpg"},
 { src: "assets/projects/sky-sow/2.JPG"},
-{ src: "assets/projects/sky-sow/3.jpg"},
-{ src: "assets/projects/sky-sow/4.jpg"},
+{ src: "assets/projects/sky-sow/3.JPG"},
+{ src: "assets/projects/sky-sow/4.JPG"},
 { src: "assets/projects/sky-sow/5.jpeg"},
 { src: "assets/projects/sky-sow/6.jpg"},
 { src: "assets/projects/sky-sow/7.jpg"},
@@ -239,7 +239,7 @@ documents: [
       tech: ["UAV", "Mechanical design", "Flight testing"],
       cover: "assets/projects/hexacopter/cover.png", gallery: [
 { src: "assets/projects/hexacopter/1.jpg"},
-{ src: "assets/projects/hexacopter/2.jpg"}
+{ src: "assets/projects/hexacopter/2.JPG"}
 ], videos: [
 { url: "https://youtu.be/gM8rtiuY_vU?si=MXYNnfGTmqVG_wLd", title: "Hexacopter Flag Display" }
 ], links: []
