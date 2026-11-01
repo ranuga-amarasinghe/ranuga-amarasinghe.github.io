@@ -1,2 +1,2 @@
 # ranuga-amarasinghe.github.io
-Robotics, engineering, and autonomous systems projects.
+Robotics, engineering, & autonomous systems projects.
